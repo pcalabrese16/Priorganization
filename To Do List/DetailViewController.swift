@@ -32,6 +32,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             saveBarButton.isEnabled = false
         } else {
             saveBarButton.isEnabled = true
+            navigationItem.title = "To Do Item"
         }
         
     }
