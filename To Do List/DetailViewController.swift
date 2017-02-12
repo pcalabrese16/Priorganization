@@ -14,12 +14,17 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var toDoField: UITextField!
     
+    @IBOutlet weak var toDoNoteView: UITextView!
+    
     var toDoItem: String?
+    
+    var toDoNote: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         toDoField.text = toDoItem
+        toDoNoteView.text = toDoNote
         toDoField.delegate = self
         toDoField.becomeFirstResponder()
         
@@ -70,7 +75,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if saveBarButton == sender as! UIBarButtonItem {
-           toDoItem = toDoField.text
+            toDoItem = toDoField.text
+            toDoNote = toDoNoteView.text
         }
     }
     

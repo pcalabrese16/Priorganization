@@ -12,7 +12,13 @@ class ToDoTableViewController: UITableViewController {
 
     var toDoArray = ["Learn Swift",
                      "Build Apps",
-                     "Change the World!"]
+                     "Change the World!",
+                     "Pick up groceries"]
+    
+    var toDoNotes = ["So I can build awesome apps",
+                     "",
+                     "By building apps for good",
+                     "Hamburger buns, beef, leafy greens, kale"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +53,8 @@ class ToDoTableViewController: UITableViewController {
 
         // Configure the cell...
         cell.textLabel?.text = toDoArray[indexPath.row]
-
+        cell.detailTextLabel?.text = toDoNotes[indexPath.row]
+        
         return cell
     }
 
@@ -65,6 +72,7 @@ class ToDoTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             toDoArray.remove(at: indexPath.row) // remove from array
+            toDoNotes.remove(at: indexPath.row) // remove selected note from note array
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -93,11 +101,14 @@ class ToDoTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
         if segue.identifier == "Show Detail" {
             let indexPath = tableView.indexPathForSelectedRow!
             let destinationViewController = segue.destination as! DetailViewController
             let selectToDo = toDoArray[indexPath.row]
+            let selectToDoNote = toDoNotes[indexPath.row]
             destinationViewController.toDoItem = selectToDo
+            destinationViewController.toDoNote = selectToDoNote
         }
     }
     
@@ -106,11 +117,24 @@ class ToDoTableViewController: UITableViewController {
         if let sourceViewController = sender.source as? DetailViewController, let toDoItem = sourceViewController.toDoItem {
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                
                 toDoArray[selectedIndexPath.row] = toDoItem
+                if let toDoNote = sourceViewController.toDoNote {
+                    toDoNotes[selectedIndexPath.row] = toDoNote
+                } else {
+                    toDoNotes[selectedIndexPath.row] = ""
+                }
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             } else {
                 let newIndexPath = IndexPath(row: toDoArray.count, section: 0)
                 toDoArray.append(toDoItem)
+                
+                if let toDoNote = sourceViewController.toDoNote {
+                    toDoNotes.append(toDoNote)
+                } else {
+                    toDoNotes.append("")
+                }
+                
                 tableView.insertRows(at: [newIndexPath], with: .bottom)
             }
             
