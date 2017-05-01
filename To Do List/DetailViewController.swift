@@ -8,13 +8,19 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITextFieldDelegate {
+class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    @IBOutlet weak var image: UIImageView!
 
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
     
     @IBOutlet weak var toDoField: UITextField!
     
     @IBOutlet weak var toDoNoteView: UITextView!
+    
+    var imagePicker = UIImagePickerController()
+
+    var item: Info?
     
     var toDoItem: String?
     
@@ -23,11 +29,15 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        toDoField.text = toDoItem
-        toDoNoteView.text = toDoNote
+        toDoField.text = item?.name
+        toDoNoteView.text = item?.desc
+        image.image = item?.image
         toDoField.delegate = self
         toDoField.becomeFirstResponder()
+        imagePicker.delegate = self
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.view.addGestureRecognizer(tap)
         if toDoItem?.characters.count == 0 || toDoItem == nil {
             saveBarButton.isEnabled = false
         } else {
@@ -37,6 +47,10 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         
     }
 
+    func hideKeyboard() {
+        self.view.endEditing(true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -48,6 +62,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard
         textField.resignFirstResponder()
+        self.view.endEditing(true)
         return true
     }
     
@@ -70,9 +85,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
 
 
     
-    
     // MARK:- Navigation
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if saveBarButton == sender as! UIBarButtonItem {
@@ -92,7 +105,41 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             navigationController!.popViewController(animated: true)
         }
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        // The info[] parameter will get a particular kind of media.  Here we get the original image.  We use as! UIImage to cast the data passed into selectedImage as a UIImage.
+        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        // Add our selectedImage to the .image parameter of our imageToPunch
+        image.image = selectedImage
+        // Now that we've got the image we can close the UIImagePicker using the dismiss method
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // This method is required so that the UIImagePickerController can be canceled by the user without picking an image.
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        // All we need to do is call the dismiss method.
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func selectPhotoPressed(_ sender: UIButton) {
+        imagePicker.sourceType = .photoLibrary
+        
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func takePhotoPressed(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePicker.sourceType = .camera
+            
+            imagePicker.delegate = self
+            
+            present(imagePicker, animated: true, completion: nil)
+        }
 
+    }
 
 }
 
