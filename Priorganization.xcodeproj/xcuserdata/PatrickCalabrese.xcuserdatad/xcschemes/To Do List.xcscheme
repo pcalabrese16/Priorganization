@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8159F7381E4E9B0000675833"
-               BuildableName = "To Do List.app"
-               BlueprintName = "To Do List"
-               ReferencedContainer = "container:To Do List.xcodeproj">
+               BuildableName = "Priorganization.app"
+               BlueprintName = "Priorganization"
+               ReferencedContainer = "container:Priorganization.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8159F74C1E4E9B0000675833"
-               BuildableName = "To Do ListTests.xctest"
-               BlueprintName = "To Do ListTests"
-               ReferencedContainer = "container:To Do List.xcodeproj">
+               BuildableName = "PriorganizationTests.xctest"
+               BlueprintName = "PriorganizationTests"
+               ReferencedContainer = "container:Priorganization.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8159F7381E4E9B0000675833"
-            BuildableName = "To Do List.app"
-            BlueprintName = "To Do List"
-            ReferencedContainer = "container:To Do List.xcodeproj">
+            BuildableName = "Priorganization.app"
+            BlueprintName = "Priorganization"
+            ReferencedContainer = "container:Priorganization.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8159F7381E4E9B0000675833"
-            BuildableName = "To Do List.app"
-            BlueprintName = "To Do List"
-            ReferencedContainer = "container:To Do List.xcodeproj">
+            BuildableName = "Priorganization.app"
+            BlueprintName = "Priorganization"
+            ReferencedContainer = "container:Priorganization.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8159F7381E4E9B0000675833"
-            BuildableName = "To Do List.app"
-            BlueprintName = "To Do List"
-            ReferencedContainer = "container:To Do List.xcodeproj">
+            BuildableName = "Priorganization.app"
+            BlueprintName = "Priorganization"
+            ReferencedContainer = "container:Priorganization.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
